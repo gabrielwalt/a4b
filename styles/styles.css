@@ -370,6 +370,21 @@ main .section.centered > div {
   text-align: center;
 }
 
+/* tighten the eyebrow label that sits directly above a heading */
+main .section.centered .default-content-wrapper p:first-child + h1,
+main .section.centered .default-content-wrapper p:first-child + h2,
+main .section.centered .default-content-wrapper p:first-child + h3 {
+  margin-top: 0.1em;
+}
+
+/* the eyebrow label above a heading is shown in uppercase */
+main .section.centered .default-content-wrapper p:first-child:has(+ h1),
+main .section.centered .default-content-wrapper p:first-child:has(+ h2),
+main .section.centered .default-content-wrapper p:first-child:has(+ h3) {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
 /* outlined button on light/cyan/gray banners */
 main .section.cyan a.button:any-link,
 main .section.gray a.button:any-link {
