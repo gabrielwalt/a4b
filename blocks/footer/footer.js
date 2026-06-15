@@ -5,29 +5,52 @@ import { getMetadata } from '../../scripts/aem.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
+  // load footer fragment
   const footerMeta = getMetadata('footer');
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-
-  let resp = await fetch(`${footerPath}.plain.html`);
-  if (!resp.ok) resp = await fetch('/footer.plain.html');
+  const resp = await fetch(`${footerPath}.plain.html`);
   if (!resp.ok) return;
 
-  const html = await resp.text();
-  const container = document.createElement('div');
-  container.innerHTML = html;
+  const fragment = document.createElement('div');
+  fragment.innerHTML = await resp.text();
 
-  // resolve fragment-relative image paths against the footer path
-  container.querySelectorAll('img[src^="images/"], img[src^="./images/"]').forEach((img) => {
-    img.src = new URL(img.getAttribute('src'), new URL(footerPath, window.location)).href;
+  // resolve fragment-relative media paths against the fragment base (matches loadFragment)
+  const resetBase = (tag, attr) => {
+    fragment.querySelectorAll(`${tag}[${attr}^="./media_"]`).forEach((el) => {
+      el[attr] = new URL(el.getAttribute(attr), new URL(footerPath, window.location)).href;
+    });
+  };
+  resetBase('img', 'src');
+  resetBase('source', 'srcset');
+
+  // the section containing the social/legal content is the bottom bar;
+  // everything before it forms the link columns (grouped by heading)
+  const groups = [...fragment.children];
+  const legal = groups.pop();
+
+  const columns = document.createElement('div');
+  columns.className = 'footer-columns';
+  // each heading begins a column group; collect the heading and following content
+  const groupEls = [];
+  groups.forEach((group) => {
+    let current = null;
+    [...group.children].forEach((el) => {
+      if (el.tagName === 'H3') {
+        current = document.createElement('div');
+        current.className = 'footer-column';
+        groupEls.push(current);
+      }
+      if (current) current.append(el);
+    });
   });
-
-  const sections = [...container.children];
-  const [columns, legal] = sections;
-
-  if (columns) {
-    columns.classList.add('footer-columns');
-    [...columns.children].forEach((col) => col.classList.add('footer-column'));
+  // the first two heading groups (Contact us + Our solutions) share one column
+  if (groupEls.length > 5) {
+    const [first, second] = groupEls;
+    while (second.firstChild) first.append(second.firstChild);
+    second.remove();
+    groupEls.splice(1, 1);
   }
+  groupEls.forEach((col) => columns.append(col));
 
   if (legal) {
     legal.classList.add('footer-legal');
@@ -41,6 +64,10 @@ export default async function decorate(block) {
     });
   }
 
+  const footer = document.createElement('div');
+  footer.append(columns);
+  if (legal) footer.append(legal);
+
   block.textContent = '';
-  block.append(...sections);
+  block.append(footer);
 }
