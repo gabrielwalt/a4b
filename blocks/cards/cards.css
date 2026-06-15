@@ -25,3 +25,63 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* logo variant: small icon + label + title cards on light gray */
+.cards.logo {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cards.logo > ul {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+.cards.logo > ul > li {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--light-color);
+  border-radius: 4px;
+  background-color: var(--light-color);
+  padding: 16px;
+}
+
+.cards.logo .cards-card-image {
+  margin: 0 0 16px;
+}
+
+.cards.logo .cards-card-image img {
+  width: 48px;
+  height: 48px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.cards.logo .cards-card-body {
+  margin: 0;
+}
+
+.cards.logo .cards-card-body p {
+  margin: 0;
+  font-size: var(--body-font-size-xs);
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.cards.logo .cards-card-body p:first-child:not(:last-child) {
+  margin-bottom: 8px;
+  color: var(--dark-color);
+}
+
+.cards.logo .cards-card-body p strong {
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* single centered card (e.g. one webinar) */
+.cards.logo.single > ul {
+  grid-template-columns: minmax(280px, 378px);
+  justify-content: center;
+}

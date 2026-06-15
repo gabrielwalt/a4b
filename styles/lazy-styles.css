@@ -1,1 +1,9 @@
 /* add global styles that can be loaded post LCP here */
+
+/* centered heading above a cards block (e.g. "Learn more about ...") */
+main .section .default-content-wrapper h3 {
+  text-align: center;
+  font-size: var(--heading-font-size-l);
+  margin: 48px auto 24px;
+  max-width: 800px;
+}

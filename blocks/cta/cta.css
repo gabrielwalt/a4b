@@ -1,0 +1,120 @@
+.cta-container .cta-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.cta {
+  padding: 56px 24px;
+}
+
+.cta > div {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cta h2 {
+  margin: 0 0 16px;
+  font-size: var(--heading-font-size-xl);
+  line-height: 1.25;
+}
+
+.cta p {
+  margin: 0 0 24px;
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+}
+
+.cta .button-wrapper {
+  margin: 0;
+}
+
+/* cyan background */
+.cta.cyan {
+  background-color: var(--cyan-color);
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* dark "let's talk" banner with image */
+.cta.dark {
+  background-color: #000;
+  color: #fff;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+
+.cta.dark h2,
+.cta.dark p {
+  color: #fff;
+}
+
+/* centered cta uses an outline (secondary) button */
+.cta.cta-centered a.button:any-link {
+  background-color: transparent;
+  border-color: var(--text-color);
+  color: var(--text-color);
+}
+
+/* dark cta uses a white/outline button */
+.cta.dark a.button:any-link {
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--text-color);
+}
+
+.cta.dark a.button:any-link:hover {
+  background-color: var(--light-color);
+  border-color: var(--light-color);
+}
+
+/* centered variant (cyan "learn how to use" banner) */
+.cta.cta-centered > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  text-align: center;
+}
+
+.cta.cta-centered p:last-child {
+  margin-bottom: 0;
+}
+
+.cta.cta-split > div {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+.cta.cta-split .cta-text h2 {
+  font-size: var(--heading-font-size-xl);
+}
+
+.cta.cta-split .cta-image img {
+  width: 100%;
+  display: block;
+}
+
+@media (width >= 900px) {
+  .cta {
+    padding: 80px 32px;
+  }
+
+  .cta.cta-split > div {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 100px;
+  }
+
+  .cta.cta-split .cta-text {
+    flex: 1 1 600px;
+  }
+
+  .cta.cta-split .cta-image {
+    flex: 1 1 500px;
+  }
+}

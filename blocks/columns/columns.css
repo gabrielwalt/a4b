@@ -31,3 +31,66 @@
     order: unset;
   }
 }
+
+/* feature variant: image + text feature row used across the page */
+.columns.feature {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.columns.feature > div {
+  gap: 32px;
+}
+
+.columns.feature h2 {
+  margin: 0 0 16px;
+  font-size: var(--heading-font-size-xl);
+  line-height: 1.25;
+}
+
+.columns.feature p {
+  margin: 0 0 16px;
+  font-size: var(--body-font-size-m);
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.columns.feature ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.columns.feature li {
+  margin-bottom: 12px;
+  font-size: var(--body-font-size-m);
+  line-height: 1.5;
+}
+
+.columns.feature li strong {
+  font-weight: 700;
+}
+
+.columns.feature .columns-img-col img {
+  border-radius: 4px;
+}
+
+@media (width >= 900px) {
+  .columns.feature > div {
+    align-items: center;
+    gap: 40px;
+  }
+
+  /* give the text column more room than the image column */
+  .columns.feature > div > div {
+    flex: 1 1 55%;
+  }
+
+  .columns.feature > div > .columns-img-col {
+    flex: 1 1 42%;
+  }
+
+  /* image-right variant flips the visual order on desktop */
+  .columns.feature.image-right > div > .columns-img-col {
+    order: 1;
+  }
+}

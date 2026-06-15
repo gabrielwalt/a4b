@@ -1,5 +1,13 @@
 /* stylelint-disable max-line-length */
 @font-face {
+  font-family: adobe-clean-fallback;
+  font-style: normal;
+  font-weight: 400 700;
+  size-adjust: 100%;
+  src: local('Arial');
+}
+
+@font-face {
   font-family: roboto-condensed;
   font-style: normal;
   font-weight: 700;
