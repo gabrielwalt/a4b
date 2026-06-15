@@ -38,6 +38,15 @@
   margin: 0 auto;
 }
 
+/* divider only between consecutive plain (uncolored) feature sections;
+   a feature section that follows a colored band gets no divider */
+.section:not(.gray):not(.cyan):not(.dark)
+  + .section:not(.gray):not(.cyan):not(.dark)
+  .columns.feature {
+  padding-top: 56px;
+  border-top: 1px solid var(--divider-color);
+}
+
 .columns.feature > div {
   gap: 32px;
 }

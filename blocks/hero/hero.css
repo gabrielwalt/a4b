@@ -30,51 +30,8 @@
   height: 100%;
 }
 
-/* centered text marquee variant (no background image) */
-.hero.hero-marquee {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 360px;
-  padding: 64px 24px;
-  background-color: var(--gray-color);
-  text-align: center;
-}
-
-.hero.hero-marquee > div {
-  max-width: 800px;
-  margin: 0;
-  padding: 0;
-}
-
-.hero.hero-marquee h1 {
-  margin: 0;
-  color: var(--text-color);
-  font-size: var(--heading-font-size-xxl);
-  line-height: 1.25;
-}
-
-.hero.hero-marquee p {
-  margin: 16px 0 0;
-  color: var(--text-color);
-  font-size: var(--body-font-size-m);
-  line-height: 1.5;
-}
-
-.hero.hero-marquee p.hero-eyebrow {
-  margin: 0 0 16px;
-  font-size: var(--heading-font-size-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
 @media (width >= 900px) {
   .hero {
     padding: 40px 32px;
-  }
-
-  .hero.hero-marquee {
-    padding: 86px 32px;
   }
 }

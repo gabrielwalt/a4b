@@ -5,9 +5,11 @@ import { getMetadata } from '../../scripts/aem.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer fragment
+  // load footer fragment; default to a sibling of the current page so it
+  // resolves both locally (e.g. /content/footer) and in production (e.g. /footer)
   const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+  const dir = window.location.pathname.replace(/[^/]+$/, '');
+  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : `${dir}footer`;
   const resp = await fetch(`${footerPath}.plain.html`);
   if (!resp.ok) return;
 

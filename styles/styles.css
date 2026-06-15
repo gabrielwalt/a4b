@@ -25,6 +25,7 @@
   --accent-color: #3b63fb;
   --accent-hover-color: #274dea;
   --cyan-color: #d4f4f7;
+  --divider-color: #d8d8d8;
 
   /* fonts */
   --body-font-family: "adobe clean", "adobe-clean-fallback", sans-serif;
@@ -332,4 +333,59 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+/* background color section styles (composable with any block) */
+main .section.gray,
+main .section.cyan,
+main .section.dark {
+  margin: 0;
+  padding: 80px 0;
+}
+
+main .section.gray {
+  background-color: var(--gray-color);
+}
+
+main .section.cyan {
+  background-color: var(--cyan-color);
+}
+
+main .section.dark {
+  background-color: #000;
+  color: #fff;
+}
+
+main .section.dark h1,
+main .section.dark h2,
+main .section.dark h3,
+main .section.dark h4,
+main .section.dark h5,
+main .section.dark h6 {
+  color: #fff;
+}
+
+/* center the default content of a section when requested */
+main .section.centered > div {
+  text-align: center;
+}
+
+/* outlined button on light/cyan/gray banners */
+main .section.cyan a.button:any-link,
+main .section.gray a.button:any-link {
+  border-color: var(--text-color);
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+/* white button on dark banners */
+main .section.dark a.button:any-link {
+  border-color: #fff;
+  background-color: #fff;
+  color: var(--text-color);
+}
+
+main .section.dark a.button:any-link:hover {
+  border-color: var(--light-color);
+  background-color: var(--light-color);
 }

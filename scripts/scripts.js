@@ -118,6 +118,33 @@ function decorateButtons(main) {
 }
 
 /**
+ * Applies section styles authored via the "Section Metadata" block.
+ * Each value of the "Style" key becomes a class on the section so that
+ * background colors and other section-level styling can be composed with
+ * any blocks the section contains.
+ * @param {Element} main The main element
+ */
+function decorateSectionStyles(main) {
+  main.querySelectorAll('.section .section-metadata').forEach((meta) => {
+    const section = meta.closest('.section');
+    [...meta.children].forEach((row) => {
+      const key = row.children[0]?.textContent.trim().toLowerCase();
+      const value = row.children[1]?.textContent.trim();
+      if (key === 'style' && value) {
+        value.split(',').forEach((style) => {
+          const cls = style.trim().toLowerCase().replace(/\s+/g, '-');
+          if (cls) section.classList.add(cls);
+        });
+      }
+    });
+    // remove the metadata block (and its wrapper if now empty)
+    const wrapper = meta.parentElement;
+    meta.remove();
+    if (wrapper && wrapper !== section && wrapper.children.length === 0) wrapper.remove();
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -126,6 +153,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionStyles(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
